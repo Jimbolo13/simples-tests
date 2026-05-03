@@ -28,9 +28,9 @@ class GameState:
         self.player_name = ""
         self.clues = []
         self.suspects = {
-            "Armand": {"alibi": "Library", "motive": "Inheritance"},
-            "Celeste": {"alibi": "Garden", "motive": "Jealousy"},
-            "Lucien": {"alibi": "Cellar", "motive": "Debt"}
+            "Armand": {"alibi": "bibliothèque", "motive": "héritage"},
+            "Celeste": {"alibi": "jardin", "motive": "jalousie"},
+            "Lucien": {"alibi": "cave", "motive": "dette"}
         }
         self.discovered = []
         self.game_over = False
@@ -42,6 +42,7 @@ def intro(state):
     divider()
     slow_print("LES OMBRES DE VALMONT")
     slow_print("Un jeu de mystère et d'enquête\n")
+
     state.player_name = input("Votre nom, détective : ")
 
     divider()
@@ -56,9 +57,10 @@ def intro(state):
 def library(state):
     divider()
     slow_print("Vous entrez dans la bibliothèque poussiéreuse...")
+
     if "letter" not in state.clues:
         slow_print("Vous trouvez une lettre cachée dans un livre.")
-        slow_print("Indice obtenu : Lettre mentionnant un conflit d'héritage.")
+        slow_print("Indice obtenu : conflit d'héritage.")
         state.clues.append("letter")
     else:
         slow_print("Rien de nouveau ici.")
@@ -67,9 +69,10 @@ def library(state):
 def garden(state):
     divider()
     slow_print("Le jardin est calme, presque trop...")
+
     if "footprints" not in state.clues:
         slow_print("Des empreintes fraîches près de la fontaine.")
-        slow_print("Indice obtenu : Quelqu'un a menti sur sa présence.")
+        slow_print("Indice obtenu : quelqu'un a menti.")
         state.clues.append("footprints")
     else:
         slow_print("Le vent souffle doucement. Aucun nouvel indice.")
@@ -78,9 +81,10 @@ def garden(state):
 def cellar(state):
     divider()
     slow_print("La cave est sombre et humide...")
+
     if "weapon" not in state.clues:
         slow_print("Vous découvrez une arme ensanglantée.")
-        slow_print("Indice obtenu : L'arme du crime.")
+        slow_print("Indice obtenu : arme du crime.")
         state.clues.append("weapon")
     else:
         slow_print("Seulement des ombres.")
@@ -91,6 +95,7 @@ def cellar(state):
 def interrogate(state):
     divider()
     slow_print("Qui voulez-vous interroger ?")
+
     for suspect in state.suspects:
         print(f"- {suspect}")
 
@@ -98,7 +103,7 @@ def interrogate(state):
 
     if choice in state.suspects:
         data = state.suspects[choice]
-        slow_print(f"{choice} dit être au {data['alibi']}.")
+        slow_print(f"{choice} dit être à la {data['alibi']}.")
         slow_print(f"Motif potentiel : {data['motive']}.")
         state.discovered.append(choice)
     else:
@@ -110,12 +115,12 @@ def interrogate(state):
 def accuse(state):
     divider()
     slow_print("Qui accusez-vous ?")
+
     for suspect in state.suspects:
         print(f"- {suspect}")
 
     choice = input("> ")
 
-    # Correct answer logic
     if choice == "Armand" and "letter" in state.clues:
         ending(True)
     else:
@@ -128,6 +133,7 @@ def accuse(state):
 
 def ending(victory):
     divider()
+
     if victory:
         slow_print("Vous avez résolu le mystère !")
         slow_print("Armand voulait accélérer son héritage...")
@@ -147,6 +153,7 @@ def main():
     while not state.game_over:
         divider()
         slow_print("Que souhaitez-vous faire ?")
+
         print("1. Explorer la bibliothèque")
         print("2. Explorer le jardin")
         print("3. Explorer la cave")
