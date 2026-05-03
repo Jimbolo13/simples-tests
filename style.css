@@ -1,0 +1,25 @@
+body {
+    background: #0d0d0d;
+    color: #e6e6e6;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#game {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #444;
+}
